@@ -1,18 +1,19 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   return (
-    <div className="flex  items-center justify-between opacity-90   z-20  fixed  w-screen bg-white border-gray-400 p-4 px-6 ">
-      <a className="flex items-center" href="/">
+    <div className="flex  items-center justify-between z-20 fixed  w-screen bg-white border-gray-400 px-6 ">
+      <Link className="flex items-center" to="/">
         <img
           className="h-[75px] p-0 m-0 rounded-full"
           src="src/assets/logo3.jpeg"
           alt="logo"
         />
         <h3 className="font-bold text-2xl p-2 text-black">CHAIN⫘⫘CONNECT</h3>
-      </a>
+      </Link>
 
       {/* mobile navbar */}
       <nav>
@@ -46,27 +47,27 @@ export default function Navbar() {
             </div>
             <ul className="MENU-LINK-MOBILE-OPEN flex flex-col text-black items-center justify-between min-h-[250px]">
               <li className="border-b border-gray-400 my-8 uppercase">
-                <a href="/about">Hire Freelancer</a>
+                <Link to="/about">Hire Freelancer</Link>
               </li>
               <li className="border-b border-gray-400 my-8 uppercase">
-                <a href="/portfolio">Post a job</a>
+                <Link to="/portfolio">Post a job</Link>
               </li>
               <li className="border-b border-gray-400 my-8 uppercase">
-                <a href="/contact">Browse jobs</a>
+                <Link to="/contact">Browse jobs</Link>
               </li>
               <li>
-              <a href="/signup">
-            <button className="border-2 border-light-purple px-4 py-1.5 rounded-lg bg-dark-purple text-white hover:ring-2 hover:ring-dark-purple hover:ring-offset-2 transition-all duration-300">
-                Sign Up
-            </button>
-            </a>
+              <Link to="/auth">
+                <button className="border-2 border-light-purple px-4 py-1.5 rounded-lg bg-dark-purple text-white hover:ring-2 hover:ring-dark-purple hover:ring-offset-2 transition-all duration-300">
+                    Sign Up
+                </button> 
+            </Link>
           </li>
           <li className="mt-4">
-          <a href="/">
-            <button className="border-2 border-light-purple px-4 py-1.5 rounded-lg bg-dark-purple text-white hover:ring-2 hover:ring-dark-purple hover:ring-offset-2 transition-all duration-300">
-                Login
-            </button>
-            </a>
+            <Link to="/auth">
+              <button className="border-2 border-light-purple px-4 py-1.5 rounded-lg bg-dark-purple text-white hover:ring-2 hover:ring-dark-purple hover:ring-offset-2 transition-all duration-300">
+                  Login
+              </button>
+            </Link>
               </li>
             </ul>
           </div>
@@ -76,27 +77,27 @@ export default function Navbar() {
 
         <ul className="items center hidden text-xl space-x-8 text-black lg:flex">
           <li className="mt-2">
-            <a href="/about">Hire Freelancer</a>
+            <Link to="/about">Hire Freelancer</Link>
           </li>
           <li className="mt-2">
-            <a href="/portfolio">Post a job</a>
+            <Link to="/portfolio">Post a job</Link>
           </li>
           <li className="mt-2">
-            <a href="/contact">Browse jobs</a>
+            <Link to="/contact">Browse jobs</Link>
           </li>
           <li>
-            <a href="/signup">
+            <Link to="/auth">
             <button className="border-2 border-light-purple px-4 py-1.5 rounded-lg bg-dark-purple text-white hover:ring-2 hover:ring-dark-purple hover:ring-offset-2 transition-all duration-300">
                 Sign Up
             </button>
-            </a>
+            </Link>
           </li>
           <li >
-          <a href="/">
+          <Link to="/auth">
             <button className="border-2  border-light-purple px-4 py-1.5 rounded-lg bg-dark-purple text-white hover:ring-2 hover:ring-dark-purple hover:ring-offset-2 transition-all duration-300">
                 Login
             </button>
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

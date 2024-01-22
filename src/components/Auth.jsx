@@ -12,9 +12,9 @@ function Auth() {
       <div className="grid h-screen w-screen grid-cols-2">
         <div className={`transition-transform duration-700 ${signup ? "translate-x-full" : ""}`}>
           {signup ? (
-            <img src="src/assets/signup_welcome.jpeg" className="h-screen" alt="" />
+            <img src="src/assets/signup.jpg" className="h-screen" alt="" />
           ) : (
-            <img src="src/assets/login_bg.jpg" className="h-screen" alt="" />
+            <img src="src/assets/login.jpg" className="h-screen" alt="" />
           )}
         </div>
         <div className={`flex z-10 relative duration-700 ${signup ? "-translate-x-full" : ""} bg-white items-center justify-center transition-transform`}>
