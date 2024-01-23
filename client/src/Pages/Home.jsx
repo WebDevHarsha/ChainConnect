@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar';
 function Home() {
 
   const mainStyle = {
-    backgroundImage: `url('src/assets/bg-gif.gif')`,
+    backgroundImage: url('src/assets/bg-gif.gif'),
     backgroundSize: '5x1',
     backgroundPosition: 'center',
   };
