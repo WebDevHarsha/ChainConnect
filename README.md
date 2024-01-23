@@ -1,57 +1,59 @@
-# Chain Connect 
-Chain-Connect is revolutionizing the freelancing landscape by introducing transparency and efficiency through its decentralized web3 platform. Our innovative approach integrates cryptocurrency as a secure and transparent transaction medium, offering a seamless experience for both freelancers and employers.
+# Chain-Connect 🌐
 
+Welcome to Chain-Connect, where we are transforming the freelancing landscape with a decentralized web3 platform. Embrace transparency and efficiency as we integrate cryptocurrency into a secure and transparent transaction medium, providing a seamless experience for both freelancers and employers.
 
+## Installation 🚀
 
-## Installation 
-
+```bash
 git clone (url of repo)
-<br>
 cd ChainConnect
-<br>
-make 2 terminals.
-<br>
-1st terminal:
+```
 
-1.cd client
-2.npm install
-3.npm run dev
+### Setting up the Frontend
 
-2nd terminal:
-1.cd server
-2.npm install
-3.npx nodemon server
+```bash
+cd client
+npm install
+npm run dev
+```
 
+### Setting up the Backend
 
-## Tech stacks
+```bash
+cd server
+npm install
+npx nodemon server
+```
+
+## Tech Stacks 🛠️
+
 ### Frontend 
-1.HTML
-2.Tailwind CSS
-3.Javascript
-4.React
-5.Redux
-6.Vite
+- HTML
+- Tailwind CSS
+- Javascript
+- React
+- Redux
+- Vite
 
 ### Backend
-1.Node js
-2.Express js
-3.Socket io
+- Express.js
+- Socket.io
 
 ### Database
-1.MongoDB
+- Appwrite
 
 ### Blockchain
-Ethereum
+- Ethereum
 
 ### Smart Contract
-1.Solidity
+- Solidity
 
 ### IDE 
-1.VS Code
-2.Remix
+- VS Code
+- Remix
 
+## License 📄
 
+[MIT License](https://choosealicense.com/licenses/mit/)
 
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
+Feel free to contribute and be part of the revolution! 🚀✨
