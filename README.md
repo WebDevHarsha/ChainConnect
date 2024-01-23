@@ -5,7 +5,7 @@ Welcome to Chain-Connect, where we are transforming the freelancing landscape wi
 ## Installation 🚀
 
 ```bash
-git clone (url of repo)
+git clone https://github.com/WebDevHarsha/ChainConnect.git
 cd ChainConnect
 ```
 
