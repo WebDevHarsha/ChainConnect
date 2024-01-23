@@ -16,20 +16,20 @@ function Home() {
       <h1 className="text-5xl font-bold mb-4">Connect Through Chain Connect</h1>
       <p className="text-xl mb-10">Talents at your fingertips</p>
       <div className="flex justify-center space-x-4 mb-10">
-        <button className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-white text-black rounded-2xl">
+        <button className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-green-600 h-10 px-4 py-2 bg-white text-black rounded-full">
           Hire a Freelancer
         </button>
-        <button className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-white text-black rounded-full">
+        <button className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-green-600 h-10 px-4 py-2 bg-white text-black rounded-full">
           Start Freelancing
         </button>
       </div>
       <h2 className="text-3xl font-bold mb-4">Browse our categories</h2>
-      <button className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-white text-black rounded-lg">
+      <button className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-green-600 h-10 px-4 py-2 bg-white text-black rounded-full">
         View All
       </button>
       <div className="mt-10 text-left">
         <h3 className="text-5xl font-bold">Access a worldwide</h3>
-        <h3 className="text-5xl font-light">pool of exceptional talent</h3>
+        <h3 className="text-5xl font-light">Pool of exceptional talent</h3>
       </div>
       <div className="mt-10 text-center">
         <div className="mt-10 text-left">
@@ -37,14 +37,14 @@ function Home() {
         </div>
       </div>
       <div className="mt-10 text-left grid grid-cols-1 md:grid-cols-2 gap-8 w-1/2">
-        <div>
+        <div className="bg-gray-300 bg-opacity-10 rounded-2xl p-4 hover:scale-110 transition-all duration-100 ease-in-out">
           <h3 className="text-2xl font-bold mb-4">Post your job</h3>
           <p className="text-lg">
             It's free and easy! Get lots of competitive bids that suit your budget
             in minutes. Start making your dreams reality.
           </p>
         </div>
-        <div>
+        <div className="bg-gray-300 bg-opacity-10 rounded-2xl p-4 hover:scale-110 transition-all duration-100 ease-in-out">
           <h3 className="text-2xl font-bold mb-4">Choose freelancers</h3>
           <p className="text-lg">
             No job is too big or complex. We've got freelancers for jobs of any
@@ -52,14 +52,14 @@ function Home() {
             to life.
           </p>
         </div>
-        <div>
+        <div className="bg-gray-300 bg-opacity-10 rounded-2xl p-4 hover:scale-110 transition-all duration-100 ease-in-out">
           <h3 className="text-2xl font-bold mb-4">Pay safely</h3>
           <p className="text-lg">
             Only pay for work when you are 100% satisfied with the outcome. Our
             milestone payment system protects you every step of the way.
           </p>
         </div>
-        <div>
+        <div className="bg-gray-300 bg-opacity-10 rounded-2xl p-4 hover:scale-110 transition-all duration-100 ease-in-out">
           <h3 className="text-2xl font-bold mb-4">We're here to help</h3>
           <p className="text-lg">
             Your time is precious. Let our team of expert recruiters and co-pilots
@@ -69,8 +69,8 @@ function Home() {
       </div>
       <div className="mt-10 text-left">
         <h1 className="text-4xl font-bold mb-4">Forge The Future</h1>
-        <a className="text-lg text-gray-400 font-semibold underline" href="#">
-          Get Started &gt;&gt;&gt; now
+        <a className="text-lg text-gray-400 font-semibold hover:font-bold underline" href="#">
+          Get Started now &gt;&gt;&gt;
         </a>
         <div className="mt-10 text-right">
           <h3 className="text-5xl font-bold">Accomplish tasks across</h3>
