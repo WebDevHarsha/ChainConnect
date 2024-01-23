@@ -1,125 +1,75 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react'
+import { Link , useNavigate} from 'react-router-dom';
+import {useSelector, useDispatch } from 'react-redux';
+import authService from "../appwrite/auth"
+import {logout} from "../store/authSlice"
 
-export default function Navbar() {
-  const [isNavOpen, setIsNavOpen] = useState(false);
+function Navbar() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [LoggedIn , isLoggedIn] = useState(false);
+  const status = useSelector((state) => state.auth.status)
+
+  useEffect(() => {
+    if (status) {
+      isLoggedIn(true);
+    }
+    else {
+      isLoggedIn(false);
+    }
+  })
+
+  const handleLogout = () => {
+    authService.logout().then(() => {
+      dispatch(logout());
+      navigate("/auth")
+    })
+  }
 
   return (
-    <div className="flex  items-center justify-between z-20 fixed  w-screen bg-white border-gray-400 px-6 ">
-      <Link className="flex items-center" to="/">
-        <img
-          className="h-[75px] p-0 m-0 rounded-full"
-          src="src/assets/logo3.jpeg"
-          alt="logo"
-        />
-        <h3 className="font-bold text-2xl p-2 text-black">CHAIN⫘⫘CONNECT</h3>
-      </Link>
-
-      {/* mobile navbar */}
-      <nav>
-        <section className="flex lg:hidden">
-          <div
-            className=" space-y-2"
-            onClick={() => setIsNavOpen((prev) => !prev)}
-          >
-            <span className="block h-0.5 w-8 animate-pulse bg-gray-600"></span>
-            <span className="block h-0.5 w-8 animate-pulse bg-gray-600"></span>
-            <span className="block h-0.5 w-8 animate-pulse bg-gray-600"></span>
-          </div>
-
-          <div className={isNavOpen ? "showMenuNav" : "hideMenuNav"}>
-            <div
-              className="CROSS-ICON absolute top-0 right-0 px-8 py-8"
-              onClick={() => setIsNavOpen(false)}
-            >
-              <svg
-                className="h-8 w-8 text-gray-600"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            </div>
-            <ul className="MENU-LINK-MOBILE-OPEN flex flex-col text-black items-center justify-between min-h-[250px]">
-              <li className="border-b border-gray-400 my-8 uppercase">
-                <Link to="/about">Hire Freelancer</Link>
-              </li>
-              <li className="border-b border-gray-400 my-8 uppercase">
-                <Link to="/portfolio">Post a job</Link>
-              </li>
-              <li className="border-b border-gray-400 my-8 uppercase">
-                <Link to="/contact">Browse jobs</Link>
-              </li>
-              <li>
-              <Link to="/auth">
-                <button className="border-2 border-light-purple px-4 py-1.5 rounded-lg bg-dark-purple text-white hover:ring-2 hover:ring-dark-purple hover:ring-offset-2 transition-all duration-300">
-                    Sign Up
-                </button> 
-            </Link>
-          </li>
-          <li className="mt-4">
-            <Link to="/auth">
-              <button className="border-2 border-light-purple px-4 py-1.5 rounded-lg bg-dark-purple text-white hover:ring-2 hover:ring-dark-purple hover:ring-offset-2 transition-all duration-300">
-                  Login
-              </button>
-            </Link>
-              </li>
-            </ul>
-          </div>
-        </section>
-
-        {/* desktop navbar */}
-
-        <ul className="items center hidden text-xl space-x-8 text-black lg:flex">
-          <li className="mt-2">
-            <Link to="/about">Hire Freelancer</Link>
-          </li>
-          <li className="mt-2">
-            <Link to="/portfolio">Post a job</Link>
-          </li>
-          <li className="mt-2">
-            <Link to="/contact">Browse jobs</Link>
-          </li>
-          <li>
-            <Link to="/auth">
-            <button className="border-2 border-light-purple px-4 py-1.5 rounded-lg bg-dark-purple text-white hover:ring-2 hover:ring-dark-purple hover:ring-offset-2 transition-all duration-300">
-                Sign Up
+    <header className="container mx-auto px-4 py-6 flex justify-between items-center bg-gray-800">
+      <div className="flex items-center space-x-4">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width={24}
+          height={24}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="h-8 w-8 text-white"
+        >
+          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+        </svg>
+        <span className="font-bold text-xl">CHAIN CONNECT</span>
+      </div>
+      <nav className="flex space-x-4">
+        <button className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 text-white bg-transparent hover:bg-white hover:text-black rounded-lg">
+          Hire Freelancer
+        </button>
+        <button className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 text-white bg-transparent hover:bg-white hover:text-black rounded-lg">
+          Earn Money Freelancing
+        </button>
+        <button className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 text-white bg-transparent hover:bg-white hover:text-black rounded-lg">
+          Post a job
+        </button>
+        <button className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 text-white bg-transparent hover:bg-white hover:text-black rounded-lg">
+          Browse jobs
+        </button>
+        <Link to={LoggedIn ? '/profile' : '/auth'}>
+            <button className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 bg-white text-black hover:bg-gray-200 rounded-full">
+              {LoggedIn ? 'Profile' : 'Sign Up'}
             </button>
-            </Link>
-          </li>
-          <li >
-          <Link to="/auth">
-            <button className="border-2  border-light-purple px-4 py-1.5 rounded-lg bg-dark-purple text-white hover:ring-2 hover:ring-dark-purple hover:ring-offset-2 transition-all duration-300">
-                Login
-            </button>
-            </Link>
-          </li>
-        </ul>
+          </Link>
+          {status && <button onClick={handleLogout} className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 bg-white text-black hover:bg-gray-200 rounded-full">
+              Logout
+          </button>}
       </nav>
-      <style>{`
-      .hideMenuNav {
-        display: none;
-      }
-      .showMenuNav {
-        display: block;
-        position: absolute;
-        width: 100%;
-        height: 100vh;
-        top: 0;
-        left: 0;
-        background: white;
-        z-index: 10;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-items: center;
-      }
-    `}</style>
-    </div>
-  );
+    </header>
+  )
 }
+
+export default Navbar
