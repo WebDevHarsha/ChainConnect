@@ -25,14 +25,6 @@ function Home() {
           Start Freelancing
         </button>
       </div>
-      <h2 className="text-3xl font-bold mb-4">Reviews</h2>
-      <div className="flex flex-wrap gap-6">
-      {
-          reviews.map((review, index) => (
-            <ReviewCard desc={review.desc} first={review.first} last={review.last} key={index} />
-          ))
-        }
-      </div>
       <div className="mt-10 text-left">
         <h3 className="text-5xl font-bold">Access a worldwide</h3>
         <h3 className="text-5xl font-light">Pool of exceptional talent</h3>
@@ -45,32 +37,27 @@ function Home() {
       <div className="flex justify-between items-center">
       <div className="mt-10 text-left grid grid-cols-1  md:grid-cols-2 gap-8 w-1/2">
         <div className="bg-gray-300 bg-opacity-25 rounded-2xl p-4 hover:scale-110 transition-all duration-100 ease-in-out">
-          <h3 className="text-2xl font-bold mb-4">Post your job</h3>
+          <h3 className="text-2xl font-bold mb-4">Publish your job opportunity</h3>
           <p className="text-lg">
-            It's free and easy! Get lots of competitive bids that suit your budget
-            in minutes. Start making your dreams reality.
+          Experience a cost-free and straightforward process! Receive numerous competitive proposals tailored to your budget within minutes. Begin turning your dreams into reality
           </p>
         </div>
         <div className="bg-gray-300 bg-opacity-25 rounded-2xl p-4 hover:scale-110 transition-all duration-100 ease-in-out">
-          <h3 className="text-2xl font-bold mb-4">Choose freelancers</h3>
+          <h3 className="text-2xl font-bold mb-4">Select skilled professionals</h3>
           <p className="text-lg">
-            No job is too big or complex. We've got freelancers for jobs of any
-            size or budget, across 2700+ skills. Let our talent bring your ideas
-            to life.
+          No task is too large or intricate. Our freelancers cover a wide range of skills, accommodating projects of any size or budget. Let our talented individuals breathe life into your ideas
           </p>
         </div>
         <div className="bg-gray-300 bg-opacity-25 rounded-2xl p-4 hover:scale-110 transition-all duration-100 ease-in-out">
-          <h3 className="text-2xl font-bold mb-4">Pay safely</h3>
+          <h3 className="text-2xl font-bold mb-4">Ensure secure payments</h3>
           <p className="text-lg">
-            Only pay for work when you are 100% satisfied with the outcome. Our
-            milestone payment system protects you every step of the way.
+            Embrace Web 3.0 and blockchain tech. Pay securely, only when 100% satisfied. Our milestone system ensures protection every step, aligning with the decentralized future
           </p>
         </div>
         <div className="bg-gray-300 bg-opacity-25 rounded-2xl p-4 hover:scale-110 transition-all duration-100 ease-in-out">
-          <h3 className="text-2xl font-bold mb-4">We're here to help</h3>
+          <h3 className="text-2xl font-bold mb-4">We stand ready to assist you</h3>
           <p className="text-lg">
-            Your time is precious. Let our team of expert recruiters and co-pilots
-            save you time finding talent, even managing your job if needed.
+          Maximize your time's value with our team of skilled recruiters and co-pilots, streamlining talent discovery and even managing your projects when necessary
           </p>
         </div>
       </div>
@@ -83,47 +70,96 @@ function Home() {
         <a className="text-lg text-gray-400 font-semibold hover:font-bold underline" href="#">
           Get Started now &gt;&gt;&gt;
         </a>
-        <div className="mt-10 text-right">
-          <h3 className="text-5xl font-bold">Accomplish tasks across</h3>
-          <h3 className="text-5xl font-light">2700+ categories effortlessly.</h3>
+        <div className="mt-10 text-left">
+          <h3 className="text-5xl font-bold">Effortlessly accomplish tasks</h3>
+          <h3 className="text-5xl font-light">Across a diverse range of categories</h3>
         </div>
         <div className="flex justify-between">
           <div className="mt-10 text-left grid grid-cols-1 md:grid-cols-2 gap-8 w-1/2">
           <div className="bg-gray-300 bg-opacity-25 rounded-2xl p-4 hover:scale-110 transition-all duration-100 ease-in-out">
-            <h3 className="text-2xl font-bold mb-4">Post your job</h3>
+            <h3 className="text-2xl font-bold mb-4">Transparent Earnings with Smart Contracts</h3>
             <p className="text-lg">
-              It's free and easy! Get lots of competitive bids that suit your budget
-              in minutes. Start making your dreams reality.
+            Ensure secure and predictable payments through our smart contract system powered by Solidity. Experience financial stability with clearly defined payment milestones.
+
             </p>
           </div>
           <div className="bg-gray-300 bg-opacity-25 rounded-2xl p-4 hover:scale-110 transition-all duration-100 ease-in-out">
-            <h3 className="text-2xl font-bold mb-4">Choose freelancers</h3>
+            <h3 className="text-2xl font-bold mb-4">Direct Connect, Better Projects:</h3>
             <p className="text-lg">
-              No job is too big or complex. We've got freelancers for jobs of any
-              size or budget, across 2700+ skills. Let our talent bring your ideas
-              to life.
+            Communicate directly with employers to understand project intricacies. Forge meaningful relationships and shape your freelance career with seamless, peer-to-peer interactions.
+
             </p>
           </div>
           <div className="bg-gray-300 bg-opacity-25 rounded-2xl p-4 hover:scale-110 transition-all duration-100 ease-in-out">
-            <h3 className="text-2xl font-bold mb-4">Pay safely</h3>
+            <h3 className="text-2xl font-bold mb-4">Global Opportunities at Your Fingertips
+
+</h3>
             <p className="text-lg">
-              Only pay for work when you are 100% satisfied with the outcome. Our
-              milestone payment system protects you every step of the way.
+            Access a world of freelance opportunities on our decentralized platform. Connect with employers globally, diversify your portfolio, and expand your professional horizons
+
             </p>
           </div>
           <div className="bg-gray-300 bg-opacity-25 rounded-2xl p-4 hover:scale-110 transition-all duration-100 ease-in-out">
-            <h3 className="text-2xl font-bold mb-4">We're here to help</h3>
+            <h3 className="text-2xl font-bold mb-4">Fair Compensation in a Trustworthy Space</h3>
             <p className="text-lg">
-              Your time is precious. Let our team of expert recruiters and co-pilots
-              save you time finding talent, even managing your job if needed.
+            Trust in a platform designed for fairness. Benefit from our commitment to cryptocurrency transactions, cryptographic trust, and a minimal 5% service charge, ensuring a reliable and secure freelancing ecosystem.
             </p>
           </div>
           </div>
           <div className="w-1/2">
-            <img src="src/assets/bg-category.jpg" alt="" />
+            <img className="" src="src/assets/secondassetimage.jpg" alt="" />
           </div>
         </div>
+        <h2 className="text-4xl mt-10 font-bold mb-4 flex justify-center items-center">Reviews</h2>
+      <div className="grid grid-cols-3 gap-6">
+      {
+          reviews.map((review, index) => (
+            <ReviewCard desc={review.desc} first={review.first} last={review.last} key={index} />
+          ))
+        }
       </div>
+      </div>  
+      <div className="dark min-h-screen bg-gray-900 text-white" style={mainStyle}>
+  <header className="flex justify-center py-8">
+    <h1 className="text-4xl font-bold">Choose Your Plan</h1>
+  </header>
+  <main className="flex flex-col items-center justify-center h-full gap-8 p-4 md:flex-row md:gap-16">
+    <div className="flex flex-col bg-gray-800 rounded-lg shadow-lg w-full max-w-md p-6 space-y-4">
+      <h2 className="text-2xl font-bold">Free Plan</h2>
+      <ul className="list-disc list-inside space-y-2">
+        <li>Access to basic features</li>
+        <li>24/7 customer support</li>
+        <li>Decentralized Advertisements</li>
+      </ul>
+      <div className="flex flex-col items-center space-y-2">
+        <span className="text-4xl font-bold">$0/month</span>
+        <a
+          className="inline-flex h-10 items-center justify-center rounded-md bg-gray-700 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-500"
+          href="#"
+        >
+          Ditch the basics, Go Fremium
+        </a>
+      </div>
+    </div>
+    <div className="flex flex-col bg-gray-800 rounded-lg shadow-lg w-full max-w-md p-6 space-y-4">
+      <h2 className="text-2xl font-bold">Fremium Plan</h2>
+      <ul className="list-disc list-inside space-y-2">
+        <li>Access to all premium features</li>
+        <li>More Exposure Towards Client</li>
+        <li>Free Credits Every Week</li>
+      </ul>
+      <div className="flex flex-col items-center space-y-2">
+        <span className="text-4xl font-bold">$15/month</span>
+        <a
+          className="inline-flex h-10 items-center justify-center rounded-md bg-gray-700 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-500"
+          href="#"
+        >
+          Start Your Free Trial Now
+        </a>
+      </div>
+    </div>
+  </main>
+</div>
     </main>
     <Footer />
   </div>
