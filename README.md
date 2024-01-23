@@ -6,19 +6,21 @@ Chain-Connect is revolutionizing the freelancing landscape by introducing transp
 ## Installation 
 
 git clone (url of repo)
+<br>
 cd ChainConnect
-
+<br>
 make 2 terminals.
-
+<br>
 1st terminal:
-cd client
-npm install
-npm run dev
+
+1.cd client
+2.npm install
+3.npm run dev
 
 2nd terminal:
-cd server
-npm install
-npx nodemon server
+1.cd server
+2.npm install
+3.npx nodemon server
 
 
 ## Tech stacks
