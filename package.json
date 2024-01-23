@@ -1,0 +1,11 @@
+{
+  "name": "chainconnect",
+  "version": "1.0.0",
+  "description": "Welcome to Chain-Connect, where we are transforming the freelancing landscape with a decentralized web3 platform. Embrace transparency and efficiency as we integrate cryptocurrency into a secure and transparent transaction medium, providing a seamless experience for both freelancers and employers.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

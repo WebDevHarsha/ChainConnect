@@ -27,7 +27,7 @@ function Navbar() {
   }
 
   return (
-    <header className="container mx-auto px-4 py-6 flex justify-between items-center bg-gray-800">
+    <header className="container bg-opacity-50 mx-auto px-4 py-6 flex justify-between items-center bg-gray-800">
       <div className="flex items-center space-x-4">
         <svg
           xmlns="http://www.w3.org/2000/svg"
