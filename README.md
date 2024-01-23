@@ -5,7 +5,7 @@ Welcome to Chain-Connect, where we are transforming the freelancing landscape wi
 ## Installation 🚀
 
 ```bash
-git clone https://github.com/WebDevHarsha/ChainConnect.git
+git clone (url of repo)
 cd ChainConnect
 ```
 
@@ -36,11 +36,12 @@ npx nodemon server
 - Vite
 
 ### Backend
+- Node.js
 - Express.js
 - Socket.io
 
 ### Database
-- Appwrite
+- MongoDB
 
 ### Blockchain
 - Ethereum
@@ -51,6 +52,20 @@ npx nodemon server
 ### IDE 
 - VS Code
 - Remix
+
+## Features 🚀
+
+1. **Authentication with Security** 🔐
+   - We prioritize the security of our users with robust authentication mechanisms.
+
+2. **Decentralized** 🌐
+   - Our platform operates on a decentralized model, ensuring fairness and transparency.
+
+3. **Freelancing Web3 App** 💼
+   - Chain-Connect is a dedicated freelancing platform leveraging the power of web3 technologies.
+
+4. **MRP (Milestone Release Payment)** 💰
+   - We provide freelancers with a secure Milestone Release Payment system, ensuring fair compensation.
 
 ## License 📄
 
