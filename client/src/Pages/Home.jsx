@@ -6,7 +6,7 @@ import ReviewCard from "../components/Carousel/components/ReviewCard";
 function Home() {
 
   const mainStyle = {
-    backgroundImage: url('src/assets/bg-gif.gif'),
+    backgroundImage:`url('src/assets/bg-gif.gif')`,
     backgroundSize: '5x1',
     backgroundPosition: 'center',
   };
@@ -25,12 +25,14 @@ function Home() {
           Start Freelancing
         </button>
       </div>
-      <h2 className="text-3xl font-bold mb-4">Browse our categories</h2>
+      <h2 className="text-3xl font-bold mb-4">Reviews</h2>
+      <div className="flex flex-wrap gap-6">
       {
           reviews.map((review, index) => (
             <ReviewCard desc={review.desc} first={review.first} last={review.last} key={index} />
           ))
         }
+      </div>
       <div className="mt-10 text-left">
         <h3 className="text-5xl font-bold">Access a worldwide</h3>
         <h3 className="text-5xl font-light">Pool of exceptional talent</h3>
@@ -40,6 +42,7 @@ function Home() {
           <h1 className="text-4xl font-bold mb-4">"Create the future."</h1>
         </div>
       </div>
+      <div className="flex justify-between items-center">
       <div className="mt-10 text-left grid grid-cols-1  md:grid-cols-2 gap-8 w-1/2">
         <div className="bg-gray-300 bg-opacity-25 rounded-2xl p-4 hover:scale-110 transition-all duration-100 ease-in-out">
           <h3 className="text-2xl font-bold mb-4">Post your job</h3>
@@ -71,6 +74,10 @@ function Home() {
           </p>
         </div>
       </div>
+      <div className="w-1/2">
+        <img src="src/assets/bg-category.jpg" alt="" />
+      </div>
+      </div>
       <div className="mt-10 text-left">
         <h1 className="text-4xl font-bold mb-4">Forge The Future</h1>
         <a className="text-lg text-gray-400 font-semibold hover:font-bold underline" href="#">
@@ -80,36 +87,41 @@ function Home() {
           <h3 className="text-5xl font-bold">Accomplish tasks across</h3>
           <h3 className="text-5xl font-light">2700+ categories effortlessly.</h3>
         </div>
-        <div className="mt-10 text-left grid grid-cols-1 md:grid-cols-2 gap-8 w-1/2">
-        <div className="bg-gray-300 bg-opacity-25 rounded-2xl p-4 hover:scale-110 transition-all duration-100 ease-in-out">
-          <h3 className="text-2xl font-bold mb-4">Post your job</h3>
-          <p className="text-lg">
-            It's free and easy! Get lots of competitive bids that suit your budget
-            in minutes. Start making your dreams reality.
-          </p>
-        </div>
-        <div className="bg-gray-300 bg-opacity-25 rounded-2xl p-4 hover:scale-110 transition-all duration-100 ease-in-out">
-          <h3 className="text-2xl font-bold mb-4">Choose freelancers</h3>
-          <p className="text-lg">
-            No job is too big or complex. We've got freelancers for jobs of any
-            size or budget, across 2700+ skills. Let our talent bring your ideas
-            to life.
-          </p>
-        </div>
-        <div className="bg-gray-300 bg-opacity-25 rounded-2xl p-4 hover:scale-110 transition-all duration-100 ease-in-out">
-          <h3 className="text-2xl font-bold mb-4">Pay safely</h3>
-          <p className="text-lg">
-            Only pay for work when you are 100% satisfied with the outcome. Our
-            milestone payment system protects you every step of the way.
-          </p>
-        </div>
-        <div className="bg-gray-300 bg-opacity-25 rounded-2xl p-4 hover:scale-110 transition-all duration-100 ease-in-out">
-          <h3 className="text-2xl font-bold mb-4">We're here to help</h3>
-          <p className="text-lg">
-            Your time is precious. Let our team of expert recruiters and co-pilots
-            save you time finding talent, even managing your job if needed.
-          </p>
-        </div>
+        <div className="flex justify-between">
+          <div className="mt-10 text-left grid grid-cols-1 md:grid-cols-2 gap-8 w-1/2">
+          <div className="bg-gray-300 bg-opacity-25 rounded-2xl p-4 hover:scale-110 transition-all duration-100 ease-in-out">
+            <h3 className="text-2xl font-bold mb-4">Post your job</h3>
+            <p className="text-lg">
+              It's free and easy! Get lots of competitive bids that suit your budget
+              in minutes. Start making your dreams reality.
+            </p>
+          </div>
+          <div className="bg-gray-300 bg-opacity-25 rounded-2xl p-4 hover:scale-110 transition-all duration-100 ease-in-out">
+            <h3 className="text-2xl font-bold mb-4">Choose freelancers</h3>
+            <p className="text-lg">
+              No job is too big or complex. We've got freelancers for jobs of any
+              size or budget, across 2700+ skills. Let our talent bring your ideas
+              to life.
+            </p>
+          </div>
+          <div className="bg-gray-300 bg-opacity-25 rounded-2xl p-4 hover:scale-110 transition-all duration-100 ease-in-out">
+            <h3 className="text-2xl font-bold mb-4">Pay safely</h3>
+            <p className="text-lg">
+              Only pay for work when you are 100% satisfied with the outcome. Our
+              milestone payment system protects you every step of the way.
+            </p>
+          </div>
+          <div className="bg-gray-300 bg-opacity-25 rounded-2xl p-4 hover:scale-110 transition-all duration-100 ease-in-out">
+            <h3 className="text-2xl font-bold mb-4">We're here to help</h3>
+            <p className="text-lg">
+              Your time is precious. Let our team of expert recruiters and co-pilots
+              save you time finding talent, even managing your job if needed.
+            </p>
+          </div>
+          </div>
+          <div className="w-1/2">
+            <img src="src/assets/bg-category.jpg" alt="" />
+          </div>
         </div>
       </div>
     </main>

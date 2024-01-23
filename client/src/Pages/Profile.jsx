@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import Navbar from "./Navbar";
+import React, { useEffect, useState, useRef } from "react";
+import Navbar from "../components/Navbar";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import authService from "../appwrite/auth";
@@ -7,12 +7,17 @@ import authService from "../appwrite/auth";
 function Profile() {
   const [showExperienceForm, setShowExperienceForm] = useState(false);
   const navigate = useNavigate();
+  const formRef = useRef();
 
   const status = useSelector((state) => state.auth.status)
   // const userData = useSelector((state) => state.auth.userData)
 
   const handleAddExperienceClick = () => {
     setShowExperienceForm((prev) => !prev);
+    window.scrollTo({
+      top: formRef.current.offsetTop,
+      behavior: "smooth",
+    });
   };
 
   // console.log(userData);
@@ -38,7 +43,7 @@ function Profile() {
   return (
     <>
       <Navbar />
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-800">
+      <div className={`flex flex-col items-center justify-start ${showExperienceForm ? "h-auto" : "min-h-screen"} bg-gray-800`}>
         <div
           className="rounded-lg border shadow-sm w-full max-w-2xl mx-auto bg-gray-900 text-white"
           data-v0-t="card"
@@ -91,7 +96,7 @@ function Profile() {
       </div>
 
       {showExperienceForm && (
-        <div className="bg-gray-700 overflow-y-hidden text-white w-full h-full">
+        <div ref={formRef} className="bg-gray-700 pt-5 overflow-y-hidden text-white w-full h-full">
           <div className="dark w-full max-w-lg space-y-6 text-white">
             <div className="space-y-2 w-screen">
               <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none text-center pt-10">
