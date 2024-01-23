@@ -1,6 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { Link , useNavigate} from 'react-router-dom';
+import {useSelector, useDispatch } from 'react-redux';
+import authService from "../appwrite/auth"
+import {logout} from "../store/authSlice"
 
 function Home() {
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [LoggedIn , isLoggedIn] = useState(false);
+  const status = useSelector((state) => state.auth.status)
+
+  useEffect(() => {
+    if (status) {
+      isLoggedIn(true);
+    }
+    else {
+      isLoggedIn(false);
+    }
+  })
+
+  const handleLogout = () => {
+    authService.logout().then(() => {
+      dispatch(logout());
+      navigate("/auth")
+    })
+  }
+
   const mainStyle = {
     backgroundImage: `url('')`,
     backgroundSize: 'cover',
@@ -39,12 +65,14 @@ function Home() {
           <a className="hover:underline" href="#">
             Browse jobs
           </a>
-          <button className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 bg-white text-black hover:bg-gray-200 rounded-full">
-            Sign Up
-          </button>
-          <button className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground h-10 px-4 py-2 hover:bg-gray-700 rounded-full">
-            Login
-          </button>
+          <Link to={LoggedIn ? '/profile' : '/auth'}>
+            <button className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 bg-white text-black hover:bg-gray-200 rounded-full">
+              {LoggedIn ? 'Profile' : 'Sign Up'}
+            </button>
+          </Link>
+          {status && <button onClick={handleLogout} className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 bg-white text-black hover:bg-gray-200 rounded-full">
+              Logout
+          </button>}
         </div>
       </nav>
       <main className="flex flex-col items-center justify-center flex-grow" style={mainStyle}>

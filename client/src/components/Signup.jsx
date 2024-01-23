@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
+import authService from '../appwrite/auth'
+import {login} from "../store/authSlice"
+import {useNavigate} from "react-router-dom"
+import {useDispatch} from "react-redux"
+
 
 function SignUp({ toggleSignup }) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: '',
     email: '',
     password: '',
+    name: '',
   });
 
   const [errors, setErrors] = useState({
@@ -55,6 +62,7 @@ function SignUp({ toggleSignup }) {
     }
 
     if (emailValid && passwordValid) {
+      create(formData);
       console.log('Signing up:', formData);
       setFormData({
         name: '',
@@ -63,6 +71,25 @@ function SignUp({ toggleSignup }) {
       });
     }
   };
+
+  const create = async(data) => {
+    setErrors("")
+    try {
+        const userData = await authService.createAccount(data)
+        if (userData) {
+            const userData = await authService.getCurrentUser()
+            if (userData) {
+                dispatch(login(userData))
+                // console.log(userData);
+                // console.log("true");
+                // window.location.href = "/"
+                navigate("/")
+            }
+        }
+    } catch (error) {
+        setErrors(error.message)
+    }
+}
 
   return (
     <div className="h-screen flex">
