@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import authService from '../appwrite/auth'
-import { useDispatch } from 'react-redux'
-import {useNavigate} from "react-router-dom"
-import {login} from "../store/authSlice"
+import authService from '../appwrite/auth';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { login } from '../store/authSlice';
 
 function Login({ toggleSignup }) {
   const dispatch = useDispatch();
@@ -68,25 +68,26 @@ function Login({ toggleSignup }) {
     }
   };
 
-  const loginMethod = async(data) => {
+  const loginMethod = async (data) => {
     setFormData({
       email: '',
       password: '',
     });
     try {
-        const session = await authService.login(data)
-        if (session) {
-            const userData = await authService.getCurrentUser()
-            if (userData) {
-                dispatch(login(userData))
-            }
-            // window.location.href = "/"
-            navigate("/")
+      const session = await authService.login(data);
+      if (session) {
+        const userData = await authService.getCurrentUser();
+        if (userData) {
+          dispatch(login(userData));
+          console.log(userData);
+          localStorage.setItem('user', JSON.stringify(userData));
+          navigate('/profile');
         }
+      }
     } catch (error) {
-        throw error
+      throw error;
     }
-}
+  };
 
   return (
     <div className="h-screen flex">
@@ -141,7 +142,7 @@ function Login({ toggleSignup }) {
             {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
             <button
               className={`w-full mt-2 bg-green-600 py-2 rounded text-white hover:bg-green-500 ${
-                (errors.email || errors.password) ? 'cursor-not-allowed opacity-50' : ''
+                errors.email || errors.password ? 'cursor-not-allowed opacity-50' : ''
               }`}
               onClick={(e) => handleLogin(e)}
               disabled={errors.email || errors.password}

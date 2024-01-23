@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import authService from '../appwrite/auth'
-import {login} from "../store/authSlice"
-import {useNavigate} from "react-router-dom"
-import {useDispatch} from "react-redux"
-
+import authService from '../appwrite/auth';
+import { login } from '../store/authSlice';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 function SignUp({ toggleSignup }) {
   const dispatch = useDispatch();
@@ -72,24 +71,22 @@ function SignUp({ toggleSignup }) {
     }
   };
 
-  const create = async(data) => {
-    setErrors("")
+  const create = async (data) => {
+    setErrors('');
     try {
-        const userData = await authService.createAccount(data)
+      const userData = await authService.createAccount(data);
+      if (userData) {
+        const userData = await authService.getCurrentUser();
         if (userData) {
-            const userData = await authService.getCurrentUser()
-            if (userData) {
-                dispatch(login(userData))
-                // console.log(userData);
-                // console.log("true");
-                // window.location.href = "/"
-                navigate("/")
-            }
+          dispatch(login(userData));
+          localStorage.setItem('user', JSON.stringify(userData));
+          navigate('/profile');
         }
+      }
     } catch (error) {
-        setErrors(error.message)
+      setErrors(error.message);
     }
-}
+  };
 
   return (
     <div className="h-screen flex">
@@ -152,7 +149,7 @@ function SignUp({ toggleSignup }) {
             <div className="text-blue-600 cursor-pointer hover:text-blue-400"></div>
             <button
               className={`w-full mt-2 bg-green-600 py-2 rounded text-white hover:bg-green-500 ${
-                (errors.email || errors.password) ? 'cursor-not-allowed opacity-50' : ''
+                errors.email || errors.password ? 'cursor-not-allowed opacity-50' : ''
               }`}
               onClick={(e) => handleSignUp(e)}
               disabled={errors.email || errors.password}
