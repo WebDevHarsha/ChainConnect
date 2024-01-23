@@ -1,5 +1,7 @@
 import Footer from "../components/Footer"
 import Navbar from '../components/Navbar';
+import { reviews } from "../components/Carousel/components/data";
+import ReviewCard from "../components/Carousel/components/ReviewCard";
 
 function Home() {
 
@@ -24,9 +26,11 @@ function Home() {
         </button>
       </div>
       <h2 className="text-3xl font-bold mb-4">Browse our categories</h2>
-      <button className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-green-600 h-10 px-4 py-2 bg-white text-black rounded-full">
-        View All
-      </button>
+      {
+          reviews.map((review, index) => (
+            <ReviewCard desc={review.desc} first={review.first} last={review.last} key={index} />
+          ))
+        }
       <div className="mt-10 text-left">
         <h3 className="text-5xl font-bold">Access a worldwide</h3>
         <h3 className="text-5xl font-light">Pool of exceptional talent</h3>
