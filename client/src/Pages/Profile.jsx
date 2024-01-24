@@ -5,12 +5,73 @@ import { useNavigate } from "react-router-dom";
 import authService from "../appwrite/auth";
 
 function Profile() {
+  const [data, setdata] = useState({
+    address: "",
+    Balance: null,
+  });
+
+  const btnhandler = () => {
+    if (window.ethereum) {
+      window.ethereum
+        .request({ method: "eth_requestAccounts" })
+        .then((res) => accountChangeHandler(res[0]));
+    } else {
+      alert("Install MetaMask extension!!");
+    }
+  };
+
+  const getbalance = (address) => {
+    window.ethereum
+      .request({
+        method: "eth_getBalance",
+        params: [address, "latest"],
+      })
+      .then((balance) => {
+        console.log("Raw Balance:", balance); // Log the raw balance received from MetaMask
+        const balanceInEther = ethers.utils.formatUnits(balance, "ether");
+        console.log("Formatted Balance:", balanceInEther); // Log the formatted balance for debugging
+        setdata((prevData) => ({
+          ...prevData,
+          Balance: balanceInEther,
+        }));
+      })
+      .catch((err) => {
+        console.error("Error fetching balance:", err);
+      });
+  };
+  const accountChangeHandler = (account) => {
+    setdata({
+      address: account,
+      Balance: null,
+    });
+
+    getbalance(account);
+  };
+
   const [showExperienceForm, setShowExperienceForm] = useState(false);
+  const [selectedRole, setSelectedRole] = useState("FREELANCER"); // Default role
   const navigate = useNavigate();
   const formRef = useRef();
 
-  const status = useSelector((state) => state.auth.status)
-  // const userData = useSelector((state) => state.auth.userData)
+  const status = useSelector((state) => state.auth.status);
+
+  const storedUserData = JSON.parse(localStorage.getItem("user")) || {};
+  const { name, email, $createdAt, emailVerification } = storedUserData;
+
+  const DateFormatting = () => {
+    const dateString = $createdAt;
+    const date = new Date(dateString);
+
+    const options = { year: "numeric", month: "short", day: "numeric" };
+    const formattedDate = date.toLocaleDateString("en-US", options);
+    return formattedDate;
+  };
+
+  useEffect(() => {
+    if (!status || !storedUserData) {
+      navigate("/");
+    }
+  }, []);
 
   const handleAddExperienceClick = () => {
     setShowExperienceForm((prev) => !prev);
@@ -20,25 +81,9 @@ function Profile() {
     });
   };
 
-  // console.log(userData);
-  const storedUserData = JSON.parse(localStorage.getItem("user")) || {};
-  const { name, email, $createdAt, emailVerification } = storedUserData;
-
-  const DateFormatting = () => {
-    const dateString = $createdAt
-    const date = new Date(dateString);
-
-    const options = { year: 'numeric', month: 'short', day: 'numeric' };
-    const formattedDate = date.toLocaleDateString('en-US', options);
-    return formattedDate
-  }
-
-
-  useEffect(() => {
-    if (!status || !storedUserData) {
-      navigate("/");
-    }
-  }, []);
+  const handleRoleChange = (event) => {
+    setSelectedRole(event.target.value);
+  };
 
   return (
     <>
@@ -91,6 +136,13 @@ function Profile() {
             >
               Add Work Experience
             </button>
+            <div className="App">
+              <button onClick={btnhandler} className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 bg-white text-black hover:bg-gray-200 hover:text-gray-900">
+                Connect to wallet
+              </button>
+            </div>
+
+
           </div>
         </div>
       </div>
@@ -106,37 +158,57 @@ function Profile() {
                 Update your profile information
               </p>
             </div>
-            <div className="flex flex-col w-screen items-center justify-center min-h-screen p-4">
+            <div className="flex flex-col w-screen items-center justify-start min-h-screen p-4">
               <div className="w-full max-w-4xl bg-[#334155] text-white rounded-lg p-8">
                 <form className="space-y-6">
                   <div>
                     <label
-                      htmlFor="bio"
+                      htmlFor="role"
                       className="block text-sm font-medium mb-2"
                     >
-                      Bio
+                      Role
                     </label>
-                    <textarea
-                      className="flex min-h-[80px] rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-full text-black"
-                      id="bio"
-                      placeholder="Enter your bio"
-                      defaultValue={""}
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="headline"
-                      className="block text-sm font-medium mb-2"
+                    <select
+                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed text-black disabled:opacity-50"
+                      id="role"
+                      value={selectedRole}
+                      onChange={handleRoleChange}
                     >
-                      Headline
-                    </label>
-                    <input
-                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 text-black disabled:cursor-not-allowed disabled:opacity-50"
-                      id="headline"
-                      placeholder="Enter your headline"
-                    />
+                      <option value="FREELANCER">Freelancer</option>
+                      <option value="CLIENT">Client</option>
+                    </select>
                   </div>
-                  <div>
+
+                  {selectedRole === "FREELANCER" && (
+                    <>
+                      <div>
+                        <label
+                          htmlFor="bio"
+                          className="block text-sm font-medium mb-2"
+                        >
+                          Bio
+                        </label>
+                        <textarea
+                          className="flex min-h-[80px] rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-full text-black"
+                          id="bio"
+                          placeholder="Enter your bio"
+                          defaultValue={""}
+                        />
+                      </div>
+                      <div>
+                        <label
+                          htmlFor="headline"
+                          className="block text-sm font-medium mb-2"
+                        >
+                          Headline
+                        </label>
+                        <input
+                          className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 text-black disabled:cursor-not-allowed disabled:opacity-50"
+                          id="headline"
+                          placeholder="Enter your headline"
+                        />
+                      </div>
+                      <div>
                     <label className="block text-sm font-medium mb-2">
                       Social Media Links
                     </label>
@@ -199,6 +271,33 @@ function Profile() {
                       Save
                     </button>
                   </div>
+                    </>
+                  )}
+
+                  {selectedRole === "CLIENT" && (
+                    <>
+                      <div>
+                        <label
+                          htmlFor="organization"
+                          className="block text-sm font-medium mb-2"
+                        >
+                          Organization/Client
+                        </label>
+                        <input
+                          className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed text-black disabled:opacity-50"
+                          id="organization"
+                          placeholder="Enter your organization/client"
+                        />
+                      </div>
+                    </>
+                  )}
+
+                  {/* Common fields for both roles */}
+                  <div className="flex justify-end">
+                    <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary-foreground h-10 px-4 py-2 bg-[#2563eb] hover:bg-[#1d4ed8]">
+                      Save
+                    </button>
+                  </div>
                 </form>
               </div>
             </div>
@@ -209,4 +308,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default Profile;

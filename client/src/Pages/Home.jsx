@@ -119,7 +119,7 @@ function Home() {
         }
       </div>
       </div>  
-      <div className="dark min-h-screen bg-gray-900 text-white" style={mainStyle}>
+      <div className="dark  bg-gray-900 text-white" style={mainStyle}>
   <header className="flex justify-center py-8">
     <h1 className="text-4xl font-bold">Choose Your Plan</h1>
   </header>
