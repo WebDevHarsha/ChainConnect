@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link , useNavigate} from 'react-router-dom';
 import {useSelector, useDispatch } from 'react-redux';
 import authService from "../appwrite/auth"
-import {logout} from "../store/authSlice"
+import {login, logout} from "../store/authSlice"
 
 function Navbar() {
   const dispatch = useDispatch();
@@ -11,18 +11,27 @@ function Navbar() {
   const status = useSelector((state) => state.auth.status)
 
   useEffect(() => {
-    if (status) {
-      isLoggedIn(true);
+    let storedUserData = localStorage.getItem("user");
+
+    if (storedUserData !== null && storedUserData !== undefined && storedUserData!={}) {
+      const parsedUserData = JSON.parse(storedUserData);
+
+      if (Object.keys(parsedUserData).length !== 0) {
+        isLoggedIn(true);
+        dispatch(login(parsedUserData));
+      } else {
+        dispatch(logout());
+      }
+    } else {
+      dispatch(logout());
     }
-    else {
-      isLoggedIn(false);
-    }
-  })
+
+  },[])
 
   const handleLogout = () => {
     authService.logout().then(() => {
       dispatch(logout());
-      localStorage.setItem('user', undefined)
+      localStorage.setItem('user', {})
       navigate("/auth")
     })
   }

@@ -79,7 +79,7 @@ function Login({ toggleSignup }) {
         const userData = await authService.getCurrentUser();
         if (userData) {
           dispatch(login(userData));
-          console.log(userData);
+          // console.log(userData);
           localStorage.setItem('user', JSON.stringify(userData));
           navigate('/profile');
         }
