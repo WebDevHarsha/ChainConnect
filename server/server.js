@@ -1,97 +1,35 @@
 const express = require('express');
-const http = require('http');
-const socketIO = require('socket.io');
-const { ethers } = require('ethers');
+const bodyParser = require('body-parser');
+const { MongoClient } = require('mongodb');
+const cors = require('cors'); 
 
 const app = express();
-const server = http.createServer(app);
-const io = socketIO(server);
+const port = 5000;
 
-// Serve static files
-app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.json());
+app.use(cors()); 
 
-// Socket.IO connection and event handling
-io.on('connection', (socket) => {
-  console.log('User connected:', socket.id);
+const url = 'mongodb://localhost:27017/';
+const dbName = 'mydb';
 
-  // Handle new messages
-  socket.on('chat message', (message) => {
-    console.log('Received message:', message);
+app.post('/api/submitFormData', async (req, res) => {
+  const formData = req.body;
 
-    // Broadcast the message to all connected clients
-    io.emit('chat message', message);
-  });
+  try {
+    const client = await MongoClient.connect(url, { useUnifiedTopology: true });
+    const db = client.db(dbName);
+    const collection = db.collection('mycollection'); // Replace with your collection name
 
-  // Handle hiring process
-  socket.on('hireFreelancer', async (hireInfo) => {
-    try {
-      // Balance checking logic
-      const userAddress = hireInfo.userAddress;
-      const requiredAmount = hireInfo.requiredAmount;
+    await collection.insertOne(formData);
 
-      // Replace with your Ethereum node endpoint
-      const provider = new ethers.providers.JsonRpcProvider('YOUR_NODE_ENDPOINT');
-
-      // Replace with the deployed contract address
-      const contractAddress = 'YOUR_CONTRACT_ADDRESS';
-
-      // Replace with the addresses of employer and freelancer
-      const employerAddress = 'EMPLOYER_ADDRESS';
-      const freelancerAddress = 'FREELANCER_ADDRESS';
-
-      // Create a contract instance
-      const contract = new ethers.Contract(
-        contractAddress,
-        ['function fundContract() external payable', 'function releasePaymentStage1() external', 'function releasePaymentStage2() external', 'function releasePaymentStage3() external', 'function releasePaymentToWebsite() external'],
-        provider.getSigner()  // Use the provider's signer to interact with the contract
-      );
-
-      // Get the user's balance
-      const balance = await provider.getBalance(userAddress);
-
-      // Convert the balance from Wei to Ether
-      const balanceInEther = ethers.utils.formatEther(balance);
-
-      // Check if the user has enough funds
-      if (parseFloat(balanceInEther) < requiredAmount) {
-        io.emit('hireResult', { success: false, message: 'Insufficient funds. Please add funds to your wallet.' });
-      } else {
-        // Fund the contract with the required amount
-        const tx = await contract.fundContract({ value: ethers.utils.parseEther(requiredAmount.toString()) });
-        await tx.wait();
-
-        // Simulate the completion of each stage and release payments
-        await contract.releasePaymentStage1();
-        await contract.releasePaymentStage2();
-        await contract.releasePaymentStage3();
-
-        // Release the website fee
-        await contract.releasePaymentToWebsite();
-
-        io.emit('hireResult', { success: true, message: 'Freelancer hired successfully.' });
-      }
-    } catch (error) {
-      console.error('Error hiring freelancer:', error.message || error);
-      io.emit('hireResult', { success: false, message: 'Error hiring freelancer.' });
-    }
-  });
-
-  // Handle disconnection
-  socket.on('disconnect', () => {
-    console.log('User disconnected:', socket.id);
-  });
+    client.close();
+    res.status(200).json({ success: true });
+  } catch (error) {
+    console.error('Error inserting form data into MongoDB:', error);
+    res.status(500).json({ success: false, error: 'Internal Server Error' });
+  }
 });
 
-// Start the server
-const port = process.env.PORT || 3000;
-server.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
-
-// Example usage
-// This part is the client-side code embedded in the server
-// You can include your HTML and client-side JavaScript code here
-// For simplicity, I'll include a simple HTML and JavaScript snippet
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/public/index.html');
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });

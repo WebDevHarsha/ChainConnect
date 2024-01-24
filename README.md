@@ -39,6 +39,7 @@ npx nodemon server
 - Node.js
 - Express.js
 - Socket.io
+- Ethers.js
 
 ### Database
 - MongoDB

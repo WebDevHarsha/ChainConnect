@@ -39,8 +39,11 @@ function Profile() {
         console.error("Error fetching balance:", err);
       });
   };
+<<<<<<< HEAD
   
 
+=======
+>>>>>>> 3aed326dd40502be225c59eec5095e40e494e2fc
   const accountChangeHandler = (account) => {
     setdata({
       address: account,
@@ -49,7 +52,11 @@ function Profile() {
 
     getbalance(account);
   };
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 3aed326dd40502be225c59eec5095e40e494e2fc
   const [showExperienceForm, setShowExperienceForm] = useState(false);
   const [selectedRole, setSelectedRole] = useState("FREELANCER"); // Default role
   const navigate = useNavigate();
@@ -160,6 +167,10 @@ function Profile() {
               </button>
             </div>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3aed326dd40502be225c59eec5095e40e494e2fc
           </div>
         </div>
       </div>
@@ -326,4 +337,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default Profile;
